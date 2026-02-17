@@ -32,3 +32,17 @@ public:
     return head;
     }
 };
+
+// getting the lenght of a ll :)
+
+class Solution {
+public:
+    int getLength(ListNode* head) {
+    int count = 0;
+    while (head != nullptr) {
+        count++;
+        head = head->next;
+    }
+    return count;
+    }
+};
