@@ -59,3 +59,24 @@ public:
     return false;
     }
 };
+
+// leet 237 ( deleting a given node from the middle of a ll without head)
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int data;
+ *     ListNode *next;
+ *     ListNode(int x) : data(x), next(NULL) {}
+ * };
+ */
+
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        node->data = node->next->data;
+        ListNode* temp = node->next;
+        node->next = node->next->next;
+        delete temp;
+    }
+};
