@@ -46,3 +46,16 @@ public:
     return count;
     }
 };
+
+// searching in ll
+
+class Solution {
+public:
+    bool searchKey(ListNode* head, int key) {
+        while (head != nullptr) {
+        if(head->data == key){  return true ;}
+        head = head->next;
+    }
+    return false;
+    }
+};
