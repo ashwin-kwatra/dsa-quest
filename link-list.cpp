@@ -20,3 +20,15 @@ class Solution {
             return head;
         }
 };
+
+// deletion of the current head 
+
+class Solution {
+public:
+    ListNode* deleteHead(ListNode* &head) {
+    ListNode* n = head->next;
+    delete head;
+    head = n;
+    return head;
+    }
+};
