@@ -80,3 +80,29 @@ public:
         delete temp;
     }
 };
+
+// inserting a given data x at the k-th position inside a linked list
+
+class Solution {
+public:
+    ListNode* insertAtK(ListNode* &head, int x, int k) {
+        if (k == 1) {
+            ListNode* n = new ListNode(x);
+            n->next = head;
+            head = n;
+            return head;
+        }
+        ListNode* temp = head;
+        int count = 1;
+        while (temp != nullptr && count < k - 1) {
+            temp = temp->next;
+            count++;
+        }
+        if (temp != nullptr) {
+            ListNode* n = new ListNode(x);
+            n->next = temp->next;
+            temp->next = n;
+        }
+        return head;
+    }
+};
