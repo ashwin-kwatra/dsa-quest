@@ -106,3 +106,27 @@ public:
         return head;
     }
 };
+
+class DListNode{
+  public:
+    int data;
+    DListNode *prev;
+    DListNode *next;
+    DListNode() : data(0), prev(nullptr), next(nullptr) {}
+    DListNode(int x) : data(x), prev(nullptr), next(nullptr) {}
+    DListNode(int x, DListNode *prev, DListNode *next) : data(x), prev(prev), next(next) {}
+};
+
+class Solution {
+public:
+    DListNode* deleteHead(DListNode* &head) {
+        if (head == nullptr) return head;
+        DListNode* n = head->next;
+        if (n != nullptr) {
+            n->prev = nullptr;
+        }
+        delete head;
+        head = n;
+        return head;
+    }
+};
