@@ -62,15 +62,6 @@ public:
 
 // leet 237 ( deleting a given node from the middle of a ll without head)
 
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int data;
- *     ListNode *next;
- *     ListNode(int x) : data(x), next(NULL) {}
- * };
- */
-
 class Solution {
 public:
     void deleteNode(ListNode* node) {
@@ -107,6 +98,8 @@ public:
     }
 };
 
+// doubly nlinked list format 
+
 class DListNode{
   public:
     int data;
@@ -116,6 +109,8 @@ class DListNode{
     DListNode(int x) : data(x), prev(nullptr), next(nullptr) {}
     DListNode(int x, DListNode *prev, DListNode *next) : data(x), prev(prev), next(next) {}
 };
+
+// doubly linked list , deleting head
 
 class Solution {
 public:
@@ -127,6 +122,25 @@ public:
         }
         delete head;
         head = n;
+        return head;
+    }
+};
+
+//reversing a dll 
+
+class Solution {
+public:
+    DListNode* Dllreverse(DListNode* &head) {
+        if (head == nullptr) return head;
+        DListNode* n = head;
+        DListNode* temp = nullptr;
+        while (n != nullptr) {
+            temp = n->next;
+            n->next = n->prev;
+            n->prev = temp;
+            head = n;       
+            n = n->prev;      
+        }
         return head;
     }
 };
