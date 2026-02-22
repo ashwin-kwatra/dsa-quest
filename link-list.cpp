@@ -10,7 +10,6 @@ class ListNode{
 };
 
 // insertion at start of linked lsit queston :
-
 class Solution {
     public:
         ListNode* insertAtHead(ListNode* &head, int X) {
@@ -22,7 +21,6 @@ class Solution {
 };
 
 // deletion of the current head 
-
 class Solution {
 public:
     ListNode* deleteHead(ListNode* &head) {
@@ -34,7 +32,6 @@ public:
 };
 
 // getting the lenght of a ll :)
-
 class Solution {
 public:
     int getLength(ListNode* head) {
@@ -48,7 +45,6 @@ public:
 };
 
 // searching in ll
-
 class Solution {
 public:
     bool searchKey(ListNode* head, int key) {
@@ -61,7 +57,6 @@ public:
 };
 
 // leet 237 ( deleting a given node from the middle of a ll without head)
-
 class Solution {
 public:
     void deleteNode(ListNode* node) {
@@ -73,7 +68,6 @@ public:
 };
 
 // inserting a given data x at the k-th position inside a linked list
-
 class Solution {
 public:
     ListNode* insertAtK(ListNode* &head, int x, int k) {
@@ -99,7 +93,6 @@ public:
 };
 
 // doubly nlinked list format 
-
 class DListNode{
   public:
     int data;
@@ -111,7 +104,6 @@ class DListNode{
 };
 
 // doubly linked list , deleting head
-
 class Solution {
 public:
     DListNode* deleteHead(DListNode* &head) {
@@ -127,7 +119,6 @@ public:
 };
 
 //reversing a dll 
-
 class Solution {
 public:
     DListNode* Dllreverse(DListNode* &head) {
@@ -142,5 +133,71 @@ public:
             n = n->prev;      
         }
         return head;
+    }
+};
+
+// leet 876 - count pass + return pass 
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        int ct=0;
+        ListNode* n =  head ;
+        while (n != nullptr) {
+            ct++;
+            n = n->next;
+        }
+        ct=ct/2;
+        while (ct != 0) {
+        ct--;
+        head = head->next;
+    }
+    return head;
+    }
+};
+
+// leet 876 slow poitner and fast pointer sollution 
+class Solution {
+public:
+    ListNode* middleNode2(ListNode* head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
+    }
+};
+
+// leet 206 - reversing a ll
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* prev = nullptr;
+        ListNode* n = head;
+        while (n != nullptr) {
+            ListNode* temp = n->next; 
+            n->next = prev;            
+            prev = n;                  
+            n = temp;               
+        }
+        return prev; 
+    }
+};   
+
+//leet-141 (detect if loop exists in ll)
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        if(head== NULL){return false;}
+        if(head->next==nullptr ){return false;}
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast){return true;}
+        }
+        return false;
     }
 };
