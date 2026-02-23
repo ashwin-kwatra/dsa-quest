@@ -1,4 +1,6 @@
-
+#include<string.h>;
+#include<iostream>;
+#include<stdio.h>;
 // Definition of singly linked list:
 class ListNode{
   public:
@@ -254,5 +256,68 @@ public:
             }
         }
         return nullptr;
+    }
+};
+
+// leet 234 (pallindrome check of ll( string convert methord)
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        std::string s = "";
+        while (head != nullptr) {
+            s += std::to_string(head->data);
+            head = head->next;
+        }
+
+        int l = 0, r = s.size() - 1;
+        while (l < r) {
+            if (s[l] != s[r]) return false;
+            l++;
+            r--;
+        }
+        return true;
+    }
+};
+
+//leet 234 half reverse methord ( same time but o(1) space)
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        if (head == nullptr || head->next == nullptr)
+            return true;
+
+        // Step 1: Find middle
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+
+        // Step 2: Reverse second half
+        ListNode* prev = nullptr;
+        ListNode* curr = slow;
+
+        while (curr != nullptr) {
+            ListNode* nextNode = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = nextNode;
+        }
+
+        // Step 3: Compare both halves
+        ListNode* firstHalf = head;
+        ListNode* secondHalf = prev;
+
+        while (secondHalf != nullptr) {
+            if (firstHalf->data != secondHalf->data)
+                return false;
+
+            firstHalf = firstHalf->next;
+            secondHalf = secondHalf->next;
+        }
+
+        return true;
     }
 };
