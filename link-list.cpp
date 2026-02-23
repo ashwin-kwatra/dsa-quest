@@ -189,7 +189,7 @@ public:
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
-        if(head== NULL){return false;}
+        if(head== nullptr){return false;}
         if(head->next==nullptr ){return false;}
         ListNode* slow = head;
         ListNode* fast = head;
@@ -199,5 +199,60 @@ public:
             if (slow == fast){return true;}
         }
         return false;
+    }
+};
+
+//leet 142 brute force
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+       if(head== nullptr){return nullptr;}
+        if(head->next==nullptr ){return nullptr;}
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+            if (slow == fast){
+                int count=0;
+                ListNode* stop=slow;
+                while(true){
+                    if(slow==head){return head;}
+                    slow=slow->next;
+                    if (slow==stop){
+                        head=head->next;
+                        count+=1;
+                    }
+                }
+            }
+        } 
+        return nullptr;
+    }
+};
+// leet 142 solution - 1stpart is same but 2nd p[art mmopdify to reduce time complexity]
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        if(head == nullptr || head->next == nullptr)
+            return nullptr;
+
+        ListNode* slow = head;
+        ListNode* fast = head;
+
+        while (fast != nullptr && fast->next != nullptr) {
+            slow = slow->next;
+            fast = fast->next->next;
+
+            if (slow == fast) {
+                // FIXED PART
+                slow = head;
+                while (slow != fast) {
+                    slow = slow->next;
+                    fast = fast->next;
+                }
+                return slow;  
+            }
+        }
+        return nullptr;
     }
 };

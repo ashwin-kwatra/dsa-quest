@@ -4,7 +4,7 @@ hey , if you are seeing this that means you are looking at my solutions to the d
 pov : iv alredy d0ne strings , arrays , binary search but ill reupload them during revision !
 
 ╭────────────────────────────╮
-│   ⚡ PROCESSING DATA ⚡   │
+│ ⚡ QUESTIONS PROGRESS  ⚡ │
 ├────────────────────────────┤
 │   ▓▓▓▓▓░░░░░░░░░░░░░░░░    │
 │        26% COMPLETE        │
