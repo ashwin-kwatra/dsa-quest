@@ -344,3 +344,169 @@ odd->next = temp;
 return head;
       }
 };
+
+//leet 19 ( double pass solution o(2n) ,o(1) )
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+     int ctr=0;
+     if(head->next==nullptr){return NULL;}
+     ListNode* x= head;
+     while (x!=nullptr){
+        ctr+=1;
+        x=x->next;
+     }
+     ctr=ctr-n;
+     x=head;
+     if(ctr==0){return head->next ;}
+     while (ctr>1){
+        ctr-=1;
+        x=x->next;
+     }
+     x->next=x->next->next;
+     return head;
+     }
+    
+};
+
+//leet 19 ( remooving nth node from end single pass o(n) , o(1))
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+
+        ListNode* dummy = new ListNode(0);
+        dummy->next = head;
+
+        ListNode* x = dummy;      // fast
+        ListNode* y = dummy;      // slow
+        for(int i = 0; i <= n; i++){
+            x = x->next;
+        }
+        while(x != nullptr){
+            x = x->next;
+            y = y->next;
+        }
+
+        y->next = y->next->next;
+
+        return dummy->next;
+    }
+};
+
+//leet 2095 ( deleting middle node ( 2 pointer)
+class Solution {
+public:
+    ListNode* deleteMiddle(ListNode* head) {
+        if(head->next==nullptr){return NULL;}
+        ListNode* slow = head;
+        ListNode* fast = head;
+        ListNode* temp=head;
+        while (fast != nullptr && fast->next != nullptr) {
+            temp=slow;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        temp->next=temp->next->next;
+        return head;
+    }
+};
+
+// sorting a linked list of 0,s 1,s and 2,s
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+        if (!head || !head->next) return head;
+        ListNode headZero(0), headOne(0), headTwo(0);
+        ListNode* zero = &headZero;
+        ListNode* one  = &headOne;
+        ListNode* two  = &headTwo;
+        ListNode* curr = head;
+        while (curr) {
+            if (curr->data == 0) {
+                zero->next = curr;
+                zero = zero->next;
+            }
+            else if (curr->data == 1) {
+                one->next = curr;
+                one = one->next;
+            }
+            else {
+                two->next = curr;
+                two = two->next;
+            }
+            curr = curr->next;
+        }
+
+        two->next = nullptr;
+
+        one->next = headTwo.next;
+        zero->next = headOne.next ? headOne.next : headTwo.next;
+
+        return headZero.next;
+    }
+};
+
+// adding 1 to a number re-resented as a lined lsit
+class Solution {
+public:
+    ListNode* addOne(ListNode* head) {
+        long long num = 0;
+        ListNode* temp = head;
+
+        while (temp != nullptr) {
+            num = num * 10 + temp->data;
+            temp = temp->next;
+        }
+        num = num + 1;
+        if (num == 0) {
+            return new ListNode(0);
+        }
+        ListNode* newHead = nullptr;
+        while (num > 0) {
+            int digit = num % 10;
+            ListNode* newNode = new ListNode(digit);
+            newNode->next = newHead;
+            newHead = newNode;
+            num = num / 10;
+        }
+        return newHead;
+    }
+};
+
+// leet finding intersection point of y linked list 
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        if(headA == nullptr || headB == nullptr) return nullptr;
+        int lenA = 0;
+        int lenB = 0;
+        ListNode* tempA = headA;
+        ListNode* tempB = headB;
+        while(tempA != nullptr){
+            lenA++;
+            tempA = tempA->next;
+        }
+        while(tempB != nullptr){
+            lenB++;
+            tempB = tempB->next;
+        }
+        int diff = abs(lenA - lenB);
+        if(lenA > lenB){
+            while(diff--){
+                headA = headA->next;
+            }
+        } else {
+            while(diff--){
+                headB = headB->next;
+            }
+        }
+        while(headA != nullptr && headB != nullptr){
+            if(headA == headB){
+                return headA;
+            }
+            headA = headA->next;
+            headB = headB->next;
+        }
+        return nullptr;
+    }
+};
