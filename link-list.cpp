@@ -11,6 +11,17 @@ class ListNode{
     ListNode(int x, ListNode *next) : data(x), next(next) {}
 };
 
+// doubly nlinked list format 
+class DListNode{
+  public:
+    int data;
+    DListNode *prev;
+    DListNode *next;
+    DListNode() : data(0), prev(nullptr), next(nullptr) {}
+    DListNode(int x) : data(x), prev(nullptr), next(nullptr) {}
+    DListNode(int x, DListNode *prev, DListNode *next) : data(x), prev(prev), next(next) {}
+};
+
 // insertion at start of linked lsit queston :
 class Solution {
     public:
@@ -92,17 +103,6 @@ public:
         }
         return head;
     }
-};
-
-// doubly nlinked list format 
-class DListNode{
-  public:
-    int data;
-    DListNode *prev;
-    DListNode *next;
-    DListNode() : data(0), prev(nullptr), next(nullptr) {}
-    DListNode(int x) : data(x), prev(nullptr), next(nullptr) {}
-    DListNode(int x, DListNode *prev, DListNode *next) : data(x), prev(prev), next(next) {}
 };
 
 // doubly linked list , deleting head
@@ -599,5 +599,74 @@ public:
             temp=temp->next;
         }
         return dummy->next;
+    }
+};
+
+//leet 138
+class Solution {
+public:
+    ListNode* copyRandomList(ListNode* head) {
+        if(head == NULL) return NULL;
+        ListNode* temp = head;
+        while(temp != NULL){
+            ListNode* newnode = new ListNode(temp->data);
+            newnode->next = temp->next;
+            temp->next = newnode;
+            temp = temp->next->next; 
+        }
+        temp = head;
+        while(temp != NULL){
+            ListNode* newnode = temp->next;
+            
+          //  if(temp->random != NULL)
+              //  newnode->random = temp->random->next; 
+         //   else
+             //   newnode->random = NULL;
+            // commenting this part out cuz random is special atribute for this ll problem onli ;v
+            temp = temp->next->next;
+        }
+        temp = head;
+        ListNode* dummy = new ListNode(-1);
+        ListNode* res = dummy;
+
+        while(temp != NULL){
+            res->next = temp->next;
+            temp->next = temp->next->next; 
+
+            res = res->next;
+            temp = temp->next;
+        }
+        return dummy->next;
+    }
+};
+
+//leet 61 
+class Solution {
+public:
+    ListNode* rotateRight(ListNode* head, int k) {
+        if(head == nullptr){
+            return head;
+        }
+        int length = 1;
+        ListNode* tail = head;
+        while(tail->next != nullptr){
+            tail = tail->next;
+            length++;
+        }
+        k = k % length;
+        if(k == 0){
+            return head;
+        }
+        ListNode* tail2 = head;
+        int i = 0;
+        while(i < length - k -1){
+            i++;
+            tail2 = tail2->next;
+        }
+
+        ListNode* head2 = tail2->next;
+        tail->next = head;
+        tail2->next = NULL;
+        return head2;  
     }
 };
