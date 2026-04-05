@@ -2,7 +2,8 @@
 #include<string.h>;
 #include<iostream>;
 #include<stdio.h>;
-
+#include<vector>;
+#include <algorithm>;
 //1: pallindrome check on string
 class Solution {
 public:
@@ -20,4 +21,17 @@ public:
        }
        return true;
 }
+};
+//1. finding a number thats single out of a list of numbers where everyone is a pair < non xor solution)
+class Solution {
+public:
+    int singleNumber(std::vector<int>& nums) { 
+       sort(nums.begin(),nums.end());
+        for(int i=1;i<nums.size();i+=2)
+        {
+            if(nums[i]!=nums[i-1])
+                return nums[i-1];
+        }
+        return nums[nums.size()-1];
+    }
 };
