@@ -71,4 +71,19 @@ public:
     }
 };
 
-//
+//counting numbers =|||
+class Solution {
+public:
+    std::vector<int> singleNumber(std::vector<int>& nums) {
+        int xr = 0;
+        for (int num : nums) xr ^= num;
+        int diff = xr & (-xr);
+        int a = 0, b = 0;
+        for (int num : nums) {
+            if (num & diff) a ^= num;
+            else b ^= num;
+        }
+        if (a < b) return {a, b};
+        return {b, a};
+    }
+};
