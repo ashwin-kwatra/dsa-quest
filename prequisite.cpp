@@ -35,3 +35,26 @@ public:
         return nums[nums.size()-1];
     }
 };
+//leet 686 , string-substring rivision
+class Solution {
+public:
+    int repeatedStringMatch(std::string a, std::string b) {
+    std::string repeated_a = a;
+    int count = 1;
+
+    while (repeated_a.length() < b.length()) {
+        repeated_a += a;
+        count++;
+    }
+    if (repeated_a.find(b) != std::string::npos) {
+        return count;
+    }
+    repeated_a += a;
+    count++;
+    
+    if (repeated_a.find(b) != std::string::npos) {
+        return count;
+    }
+    return -1;
+}
+};
