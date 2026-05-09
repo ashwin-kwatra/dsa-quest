@@ -58,3 +58,29 @@ public:
     return -1;
 }
 };
+//leet 1392 rivision
+class Solution {
+public:
+    std::string longestPrefix(std::string s) {
+        int n = s.size();
+        std::vector<int> lps(n,0);
+        int pt1 = 0;
+        int pt2 = 1;
+        while(pt2 < n){
+            if(s[pt1] == s[pt2]){
+                pt1++;
+                lps[pt2] = pt1;
+                pt2++;
+            }else{
+                if(pt1 != 0){
+
+                    pt1 = lps[pt1 - 1];
+                }else{
+                    lps[pt2] = 0;
+                    pt2++;
+                }
+            }
+        }
+        return s.substr(0, lps[n-1]);
+    }
+};
